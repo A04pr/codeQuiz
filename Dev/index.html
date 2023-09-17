@@ -14,7 +14,37 @@
 
 <body>
   <main>
-    <h1>Coding Quiz Challenge</h1>
-
-    <p>Try to answer all the questions correctly in the alloted time! You will have a total of 35 seconds to answer the 5 questions. Each correct answer will award you 5 points and each incorrect answer will award you 0 points as well as subtracting 5 seconds from the clock. Click the button below to start!</p>
+    <div class="header">
+      <p>View highscores</p>
+      <p>Time remaining:</p>
+    </div>
+    <div class="titleScreen">
+      <h1>Coding Quiz Challenge</h1>
+      <p>Try to answer all the questions correctly in the alloted time! You will have a total of 35 seconds to answer the 5 questions. Each correct answer will award you 5 points and each incorrect answer will award you 0 points as well as subtracting 5 seconds from the clock. Click the button below to start!</p>
+      <button type="button" class="btn btn-primary btn-lg">Large button</button>
+    </div>
+    <div class="quizScreen">
+      <ul>
+        <li><button type="button" class="btn btn-primary btn-sm">Choice 1</button></li>
+        <li><button type="button" class="btn btn-primary btn-sm">Choice 2</button></li>
+        <li><button type="button" class="btn btn-primary btn-sm">Choice 3</button></li>
+        <li><button type="button" class="btn btn-primary btn-sm">Choice 4</button></li>
+      </ul>
+    </div>
+    <div class="scoreScreen">
+      <h2>All done!</h2>
+      <p>Your final score is</p>
+      <p>Enter initials:</p>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea"></label>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm">Submit</button>
+    </div>
+    <div class="leaderboard">
+      <h1><strong>Highscores!</strong></h1>
+      <li><button type="button" class="btn btn-primary btn-sm">Go back</button></li>
+      <li><button type="button" class="btn btn-primary btn-sm">Clear scores</button></li>
+    </div>
   </main>
+</body>
