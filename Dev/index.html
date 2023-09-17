@@ -14,14 +14,14 @@
 
 <body>
   <main>
-    <div class="header">
+    <div class="header container-fluid d-flex justify-content-between">
       <p>View highscores</p>
       <p>Time remaining:</p>
     </div>
-    <div class="titleScreen">
+    <div class="titleScreen container-fluid text-center">
       <h1>Coding Quiz Challenge</h1>
       <p>Try to answer all the questions correctly in the alloted time! You will have a total of 35 seconds to answer the 5 questions. Each correct answer will award you 5 points and each incorrect answer will award you 0 points as well as subtracting 5 seconds from the clock. Click the button below to start!</p>
-      <button type="button" class="btn btn-primary btn-lg">Large button</button>
+      <button type="button" class="btn btn-primary btn-lg">Start!</button>
     </div>
     <div class="quizScreen">
       <ul>
@@ -36,7 +36,7 @@
       <p>Your final score is</p>
       <p>Enter initials:</p>
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <textarea class="form-control" placeholder="Initials" id="floatingTextarea"></textarea>
         <label for="floatingTextarea"></label>
       </div>
       <button type="button" class="btn btn-primary btn-sm">Submit</button>

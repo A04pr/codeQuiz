@@ -1,0 +1,13 @@
+
+
+.quizScreen {
+    visibility: hidden;
+}
+
+.scoreScreen {
+    visibility: hidden;
+}
+
+.leaderboard {
+    visibility: hidden;
+}
