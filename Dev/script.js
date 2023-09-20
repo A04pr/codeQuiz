@@ -3,7 +3,7 @@ var quiz = $("#questions")
 var score = $('.score')
 var finalScore = $('#finalScore')
 var titleScreen = $(".titleScreen")
-var startButton = $('.startButton')
+var startButton = $('#startButton')
 var goBack = $('.goBackButton')
 var clear = $('.clearHighscoreButton')
 var scoreCount = 0;
@@ -13,7 +13,7 @@ var timer;
 var quizQuestions = [
     {
         id: "q1",
-        question: "",
+        question: "This is a question",
         answers: [
             "a",
             "b",
@@ -68,4 +68,17 @@ var quizQuestions = [
     },
 ];
 
+console.log(quizQuestions[0].question);
 
+function quizGame(){
+    
+}
+
+startButton.on('click', function (event) {
+    event.preventDefault();
+  
+    titleScreen.hide();
+    quizGame
+  
+  });
+  
