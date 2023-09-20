@@ -1,13 +1,29 @@
-
-
-.quizScreen {
-    visibility: hidden;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-.scoreScreen {
-    visibility: hidden;
+body {
+    height: 100vh;
 }
 
-.leaderboard {
-    visibility: hidden;
+.titleScreen {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hide {
+    display: none;
+}
+
+#finalScore {
+    font-size: 1.5em;
 }

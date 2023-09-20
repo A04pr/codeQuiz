@@ -13,38 +13,31 @@
 </head>
 
 <body>
-  <main>
-    <div class="header container-fluid d-flex justify-content-between">
-      <p>View highscores</p>
-      <p>Time remaining:</p>
+
+  <div class="header">
+    <a href="#leaderboard">View Highscores</a>
+    <div class="timer">
+      <span class="timeLeft"></span>
     </div>
-    <div class="titleScreen container-fluid text-center">
-      <h1>Coding Quiz Challenge</h1>
-      <p>Try to answer all the questions correctly in the alloted time! You will have a total of 35 seconds to answer the 5 questions. Each correct answer will award you 5 points and each incorrect answer will award you 0 points as well as subtracting 5 seconds from the clock. Click the button below to start!</p>
-      <button type="button" class="btn btn-primary btn-lg">Start!</button>
-    </div>
-    <div class="quizScreen">
-      <ul>
-        <li><button type="button" class="btn btn-primary btn-sm">Choice 1</button></li>
-        <li><button type="button" class="btn btn-primary btn-sm">Choice 2</button></li>
-        <li><button type="button" class="btn btn-primary btn-sm">Choice 3</button></li>
-        <li><button type="button" class="btn btn-primary btn-sm">Choice 4</button></li>
-      </ul>
-    </div>
-    <div class="scoreScreen">
-      <h2>All done!</h2>
-      <p>Your final score is</p>
-      <p>Enter initials:</p>
-      <div class="form-floating">
-        <textarea class="form-control" placeholder="Initials" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea"></label>
+  </div>
+  <div class="titleScreen">
+    <button type="button" class="startButton btn btn-primary btn-sm">Begin!</button>
+  </div>
+  <div id="questions">
+
+  </div>
+  <div class="score hide">
+    <div id="finalScore">Final score:</div>
+    <form>
+      <div class="initials input-group mb-3">
+        <label for="initialsForm" class="form-label">Initials:</label>
+        <input type="text" class="form-control" placeholder="ABC" aria-label="Recipient's username" aria-describedby="button-addon2" id="initialsForm">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
       </div>
-      <button type="button" class="btn btn-primary btn-sm">Submit</button>
-    </div>
-    <div class="leaderboard">
-      <h1><strong>Highscores!</strong></h1>
-      <li><button type="button" class="btn btn-primary btn-sm">Go back</button></li>
-      <li><button type="button" class="btn btn-primary btn-sm">Clear scores</button></li>
-    </div>
-  </main>
+    </form>
+  </div>
+  
+  
+
+  <script src="C:\Users\areed\Documents\Github\codeQuiz\Dev\script.js"></script>
 </body>
