@@ -1,84 +1,75 @@
-var timeLeft = $('.timeLeft')
-var quiz = $("#questions")
-var score = $('.score')
-var finalScore = $('#finalScore')
-var titleScreen = $(".titleScreen")
-var startButton = $('#startButton')
-var goBack = $('.goBackButton')
-var clear = $('.clearHighscoreButton')
-var scoreCount = 0;
-var count = 25;
-var timer;
-
-var quizQuestions = [
+const quizData = [
     {
-        id: "q1",
-        question: "This is a question",
-        answers: [
-            "a",
-            "b",
-            "c",
-            "d",
-        ],
-        correct: "a",
+        question: "This is an example, the answer is A.",
+        options: ["A", "B", "C", "D"],
+        correctAnswer: "A"
     },
     {
-        id: "q2",
-        question: "",
-        answers: [
-            "a",
-            "b",
-            "c",
-            "d",
-        ],
-        correct: "c",
+        question: "This is an example, the answer is B.",
+        options: ["A", "B", "C", "D"],
+        correctAnswer: "B"
     },
     {
-        id: "q3",
-        question: "",
-        answers: [
-            "a",
-            "b",
-            "c",
-            "d",
-        ],
-        correct: "c",
-    },
-    {
-        id: "q4",
-        question: "",
-        answers: [
-            "a",
-            "b",
-            "c",
-            "d",
-        ],
-        correct: "d",
-    },
-    {
-        id: "q5",
-        question: "",
-        answers: [
-            "a",
-            "b",
-            "c",
-            "d",
-        ],
-        correct: "b",
-    },
+        question: "This is an example, the answer is D.",
+        options: ["A", "B", "C", "D"],
+        correctAnswer: "D"
+    }
 ];
 
-console.log(quizQuestions[0].question);
+$(document).ready(function () {
+    const quizContainer = $("#questions");
+    const answerBtn = $("#answerBtn");
+    const resultContainer = $("#results");
 
-function quizGame(){
+    function buildQuiz() {
+        quizData.forEach((question, index) => {
+            const questionHTML = `
+                <div class="mb-3">
+                    <h5>${index + 1}. ${question.question}</h5>
+                    ${buildAnswers(question.options, index)}
+                </div>
+            `;
+            quizContainer.append(questionHTML);
+        });
+    }
     
-}
+    function buildAnswers(options, questionIndex) {
+        return options.map((option, index) => {
+            return `<div class="form-check">
+                        <input class="form-check-input" type="radio" name="q${questionIndex}" value="${option}">
+                        <label class="form-check-label">${option}</label>
+                    </div>`;
+        }).join('');
+    }
 
-startButton.on('click', function (event) {
-    event.preventDefault();
-  
-    titleScreen.hide();
-    quizGame
-  
-  });
-  
+    function showScore() {
+        const userResponse = collectResponses();
+        let score = 0;
+
+        quizData.forEach((question, index) => {
+            if (question.correctAnswer === userResponse[index]) {
+                score++;
+            }
+        });
+
+        const resultHTML = `<p>Your score: ${score} out of ${quizData.length}</p>`;
+        resultContainer.html(resultHTML);
+    }
+
+    function collectResponses() {
+        const userResponse = [];
+
+        quizData.forEach((question, index) => {
+            const selectedOption = $(`input[name='q${index}']:checked`).val();
+            userResponse.push(selectedOption);
+        });
+
+        return userResponse;
+    }
+
+    answerBtn.on("click", function () {
+        showScore();
+    });
+
+    buildQuiz();
+});
