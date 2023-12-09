@@ -22,6 +22,8 @@ $(document).ready(function () {
     const restartBtn = $("#restartBtn");
     const startBtn = $('#startBtn');
     const resultsContainer = $("#results-container");
+    const title = $("#title");
+    const description = $("#description");
     let currentStep = 0;
 
     function buildQuiz() {
@@ -88,6 +90,8 @@ $(document).ready(function () {
 
     startBtn.on("click", function (){
         startBtn.hide();
+        title.hide();
+        description.hide();
         buildQuiz();
     })
 
@@ -96,6 +100,8 @@ $(document).ready(function () {
         resultsContainer.empty();
         restartBtn.addClass('hidden');
         startBtn.show();
+        title.show();
+        description.show();
     });
 
 });
