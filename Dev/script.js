@@ -60,8 +60,9 @@ $(document).ready(function () {
             }
         });
 
-        const resultHTML = `<h5>Thanks for taking the quiz! Your score is: ${score} out of ${quizData.length}</h5>
-                            <button id="restartBtn" class="btn btn-primary">Retry</button>`;
+        restartBtn.removeClass('hidden');
+
+        const resultHTML = `<h5>Thanks for taking the quiz! Your score is: ${score} out of ${quizData.length}</h5>`;
         resultsContainer.html(resultHTML);
     }
 
@@ -86,8 +87,15 @@ $(document).ready(function () {
     });
 
     startBtn.on("click", function (){
-        startBtn.addClass('hidden');
+        startBtn.hide();
         buildQuiz();
     })
+
+    restartBtn.on("click", function () {
+        currentStep = 0;
+        resultsContainer.empty();
+        restartBtn.addClass('hidden');
+        startBtn.show();
+    });
 
 });
