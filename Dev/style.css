@@ -13,6 +13,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.hidden-question {
+    display: none;
+}
+
 #results {
     margin-top: 20px;
     font-weight: bold;

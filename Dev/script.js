@@ -17,58 +17,65 @@ const quizData = [
 ];
 
 $(document).ready(function () {
-    const quizContainer = $("#questions");
-    const answerBtn = $("#answerBtn");
-    const resultContainer = $("#results");
+    const questionsContainer = $("#questions-container");
+    const nextBtn = $("#nextBtn");
+    const resultsContainer = $("#results-container");
+    let currentStep = 0;
 
     function buildQuiz() {
-        quizData.forEach((question, index) => {
-            const questionHTML = `
-                <div class="mb-3">
-                    <h5>${index + 1}. ${question.question}</h5>
-                    ${buildAnswers(question.options, index)}
-                </div>
-            `;
-            quizContainer.append(questionHTML);
-        });
+        questionsContainer.children().last().addClass('hidden-question');
+
+        const question = quizData[currentStep];
+        const questionHTML = `
+            <div class="mb-3">
+                <h5>${currentStep + 1}. ${question.question}</h5>
+                ${buildOptions(question.options)}
+            </div>
+        `;
+        questionsContainer.append(questionHTML);
     }
-    
-    function buildAnswers(options, questionIndex) {
+
+    function buildOptions(options) {
         return options.map((option, index) => {
             return `<div class="form-check">
-                        <input class="form-check-input" type="radio" name="q${questionIndex}" value="${option}">
+                        <input class="form-check-input" type="radio" name="q${currentStep}" value="${option}">
                         <label class="form-check-label">${option}</label>
                     </div>`;
         }).join('');
     }
 
-    function showScore() {
-        const userResponse = collectResponses();
+    function showResult() {
+        const userAnswers = collectUserAnswers();
         let score = 0;
 
         quizData.forEach((question, index) => {
-            if (question.correctAnswer === userResponse[index]) {
+            if (question.correctAnswer === userAnswers[index]) {
                 score++;
             }
         });
 
         const resultHTML = `<p>Your score: ${score} out of ${quizData.length}</p>`;
-        resultContainer.html(resultHTML);
+        resultsContainer.html(resultHTML);
     }
 
-    function collectResponses() {
-        const userResponse = [];
+    function collectUserAnswers() {
+        const userAnswers = [];
 
-        quizData.forEach((question, index) => {
-            const selectedOption = $(`input[name='q${index}']:checked`).val();
-            userResponse.push(selectedOption);
-        });
+        for (let i = 0; i < quizData.length; i++) {
+            const selectedOption = $(`input[name='q${i}']:checked`).val();
+            userAnswers.push(selectedOption);
+        }
 
-        return userResponse;
+        return userAnswers;
     }
 
-    answerBtn.on("click", function () {
-        showScore();
+    nextBtn.on("click", function () {
+        if (currentStep < quizData.length - 1) {
+            currentStep++;
+            buildQuiz();
+        } else {
+            showResult();
+        }
     });
 
     buildQuiz();
