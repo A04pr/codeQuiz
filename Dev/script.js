@@ -19,11 +19,14 @@ const quizData = [
 $(document).ready(function () {
     const questionsContainer = $("#questions-container");
     const nextBtn = $("#nextBtn");
+    const restartBtn = $("#restartBtn");
+    const startBtn = $('#startBtn');
     const resultsContainer = $("#results-container");
     let currentStep = 0;
 
     function buildQuiz() {
-        questionsContainer.children().last().addClass('hidden-question');
+        questionsContainer.children().last().addClass('hidden');
+        nextBtn.removeClass('hidden');
 
         const question = quizData[currentStep];
         const questionHTML = `
@@ -33,6 +36,7 @@ $(document).ready(function () {
             </div>
         `;
         questionsContainer.append(questionHTML);
+
     }
 
     function buildOptions(options) {
@@ -45,6 +49,8 @@ $(document).ready(function () {
     }
 
     function showResult() {
+        questionsContainer.children().last().addClass('hidden');
+        nextBtn.addClass('hidden');
         const userAnswers = collectUserAnswers();
         let score = 0;
 
@@ -54,7 +60,8 @@ $(document).ready(function () {
             }
         });
 
-        const resultHTML = `<p>Your score: ${score} out of ${quizData.length}</p>`;
+        const resultHTML = `<h5>Thanks for taking the quiz! Your score is: ${score} out of ${quizData.length}</h5>
+                            <button id="restartBtn" class="btn btn-primary">Retry</button>`;
         resultsContainer.html(resultHTML);
     }
 
@@ -78,5 +85,9 @@ $(document).ready(function () {
         }
     });
 
-    buildQuiz();
+    startBtn.on("click", function (){
+        startBtn.addClass('hidden');
+        buildQuiz();
+    })
+
 });
