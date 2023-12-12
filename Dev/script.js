@@ -25,12 +25,17 @@ $(document).ready(function () {
     const title = $("#title");
     const description = $("#description");
     const timerDisplay = $("#timer");
+    const highScoreContainer = $("#highScoreContainer");
+    const submitScoreBtn = $("#submitScoreBtn");
+    const initialsInput = $("#initialsInput");
     let currentStep = 0;
     let timer;
 
+    let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
     function buildQuiz() {
         questionsContainer.children().last().addClass('hidden');
-        nextBtn.removeClass('hidden');
+        nextBtn.show();
 
         const question = quizData[currentStep];
         const questionHTML = `
@@ -71,7 +76,7 @@ $(document).ready(function () {
 
         const resultHTML = `<h5>Thanks for taking the quiz! Your score is: ${score} out of ${quizData.length}</h5>`;
         resultsContainer.html(resultHTML);
-
+        displayHighScores();
         stopTimer();
     }
 
@@ -106,6 +111,53 @@ $(document).ready(function () {
         timerDisplay.text(``);
     }
 
+    function displayHighScores() {
+        highScoreContainer.show();
+        highScoreContainer.empty();
+        submitScoreBtn.show();
+        initialsInput.show();
+
+        const sortedHighScores = highScores.sort((a, b) => b.score - a.score);
+
+        for (let i = 0; i < Math.min(sortedHighScores.length, 5); i++) {
+            const highScore = sortedHighScores[i];
+            const highScoreHTML = `<p>${highScore.initials}: ${highScore.score}</p>`;
+            highScoreContainer.append(highScoreHTML);
+        }
+    }
+
+    function saveHighScore(initials, score) {
+        const newHighScore = { initials, score };
+        highScores.push(newHighScore);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    }
+
+    submitScoreBtn.on("click", function () {
+        const initials = initialsInput.val().toUpperCase();
+        const score = calculateScore();
+
+        if (initials && score >= 0) {
+            saveHighScore(initials, score);
+            displayHighScores();
+            highScoreContainer.show();
+            submitScoreBtn.hide();
+            initialsInput.hide();
+        }
+    });
+
+    function calculateScore() {
+        const userAnswers = collectUserAnswers();
+        let score = 0;
+
+        quizData.forEach((question, index) => {
+            if (question.correctAnswer === userAnswers[index]) {
+                score++;
+            }
+        });
+
+        return score;
+    }
+
     nextBtn.on("click", function () {
         if (currentStep < quizData.length - 1) {
             currentStep++;
@@ -115,7 +167,7 @@ $(document).ready(function () {
         }
     });
 
-    startBtn.on("click", function (){
+    startBtn.on("click", function () {
         startBtn.hide();
         title.hide();
         description.hide();
@@ -129,6 +181,10 @@ $(document).ready(function () {
         startBtn.show();
         title.show();
         description.show();
+        highScoreContainer.hide();
+        submitScoreBtn.hide();
+        initialsInput.hide();
+        initialsInput.val("");
         stopTimer();
         timerDisplay.hide();
     });
