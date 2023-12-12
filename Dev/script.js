@@ -26,6 +26,7 @@ $(document).ready(function () {
     const description = $("#description");
     const timerDisplay = $("#timer");
     let currentStep = 0;
+    let timer;
 
     function buildQuiz() {
         questionsContainer.children().last().addClass('hidden');
@@ -43,7 +44,6 @@ $(document).ready(function () {
         if (currentStep === 0) {
             startTimer();
         }
-
     }
 
     function buildOptions(options) {
@@ -95,15 +95,15 @@ $(document).ready(function () {
                 timerDisplay.show();
                 timerDisplay.text(`Time: ${timeLeft}s`);
             } else {
-                timeLeft = 9999;
                 showResult();
+                stopTimer();
             }
         }, 1000);
     }
 
     function stopTimer() {
         clearInterval(timer);
-        timerDisplay.text(``);;
+        timerDisplay.text(``);
     }
 
     nextBtn.on("click", function () {
@@ -120,8 +120,7 @@ $(document).ready(function () {
         title.hide();
         description.hide();
         buildQuiz();
-        startTimer();
-    })
+    });
 
     restartBtn.on("click", function () {
         currentStep = 0;
@@ -131,6 +130,7 @@ $(document).ready(function () {
         title.show();
         description.show();
         stopTimer();
+        timerDisplay.hide();
     });
 
 });
