@@ -51,6 +51,18 @@ $(document).ready(function () {
         }
     }
 
+    function subtractTime() {
+        let currentQuestion = quizData[currentStep];
+        let timePenalty = 7;
+    
+        if (currentQuestion && collectUserAnswers()[currentStep] !== currentQuestion.correctAnswer) {
+            let currentTime = parseInt(timerDisplay.text().replace("Time: ", ""), 10);
+            let newTime = Math.max(0, currentTime - timePenalty);
+            timerDisplay.text(`Time: ${newTime}s`);
+        }
+    }
+    
+
     function buildOptions(options) {
         return options.map((option, index) => {
             return `<div class="form-check">
@@ -92,8 +104,8 @@ $(document).ready(function () {
     }
 
     function startTimer() {
-        let timeLeft = 5;
-
+        let timeLeft = parseInt(timerDisplay.text().replace("Time: ", ""), 10) || 30;
+    
         timer = setInterval(function () {
             if (timeLeft > 0) {
                 timeLeft--;
@@ -158,10 +170,14 @@ $(document).ready(function () {
         return score;
     }
 
+
     nextBtn.on("click", function () {
         if (currentStep < quizData.length - 1) {
+            subtractTime();
+            clearInterval(timer);
             currentStep++;
             buildQuiz();
+            startTimer();
         } else {
             showResult();
         }
