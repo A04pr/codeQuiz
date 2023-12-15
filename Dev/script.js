@@ -1,19 +1,55 @@
 const quizData = [
     {
-        question: "This is an example, the answer is A.",
-        options: ["A", "B", "C", "D"],
-        correctAnswer: "A"
+        question: "What does HTML stand for?",
+        options: ["Hyper Text Markup Language", "Home Tool Markup Language", "It doesn't mean anything", "Hyperlinks and Text Markup Language"],
+        correctAnswer: "Hyper Text Markup Language"
     },
     {
-        question: "This is an example, the answer is B.",
-        options: ["A", "B", "C", "D"],
-        correctAnswer: "B"
+        question: "What does CSS stand for?",
+        options: ["Computer Style Sheets", "Colorful Style Sheets", "Cascading Style Sheets", "Creative Style Sheets"],
+        correctAnswer: "Cascading Style Sheets"
     },
     {
-        question: "This is an example, the answer is D.",
-        options: ["A", "B", "C", "D"],
-        correctAnswer: "D"
-    }
+        question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
+        options: ["script src='xxx.js'", "script href='xxx.js'", "script name='xxx.js'", "script link='xxx.js"],
+        correctAnswer: "script src='xxx.js'"
+    },
+    {
+        question: "How can you make a numbered list?",
+        options: ["ol", "ul", "list", "dl"],
+        correctAnswer: "ol"
+    },
+    {
+        question: "How do you call a function named 'myFunction'?",
+        options: ["call myFunction()", "myFunction", "call function myFunction", "myFunction()"],
+        correctAnswer: "myFunction()"
+    },
+    {
+        question: "What is the correct way to write a JavaScript array?",
+        options: ["var colors='red', 'green', 'blue'", "var colors=['red', 'green', 'blue']", "var colors=(1: 'red' 2:'green' 3:'blue')", "var colors={'red', 'green', 'blue'}"],
+        correctAnswer: "var colors=['red', 'green', 'blue']"
+    },
+    {
+        question: "Which HTML attribute specifies an alternate text for an image, if the image cannot be displayed?",
+        options: ["alt", "title", "src", "desc"],
+        correctAnswer: "alt"
+    },
+    {
+        question: "How do you declare a JavaScript variable?",
+        options: ["variable carName;", "v carName;", "var carName;", "var = carName;"],
+        correctAnswer: "var carName;"
+    },
+    {
+        question: "Which CSS property is used to change the text color of an element?",
+        options: ["color", "text-color", "fgcolor", "text"],
+        correctAnswer: "color"
+    },
+    {
+        question: "How do you select elements with class name 'test'?",
+        options: ["test", "#test", ".test", "*test"],
+        correctAnswer: ".test"
+    },
+    
 ];
 
 $(document).ready(function () {
@@ -104,7 +140,7 @@ $(document).ready(function () {
     }
 
     function startTimer() {
-        let timeLeft = parseInt(timerDisplay.text().replace("Time: ", ""), 10) || 30;
+        let timeLeft = parseInt(timerDisplay.text().replace("Time: ", ""), 10) || 150;
     
         timer = setInterval(function () {
             if (timeLeft > 0) {
