@@ -69,6 +69,7 @@ $(document).ready(function () {
 
     let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
+        /* Builds out questions and user response choices. */
     function buildQuiz() {
         questionsContainer.children().last().addClass('hidden');
         nextBtn.show();
@@ -87,6 +88,7 @@ $(document).ready(function () {
         }
     }
 
+        /* Subtracts time if the user answers incorrectly */
     function subtractTime() {
         let currentQuestion = quizData[currentStep];
         let timePenalty = 7;
@@ -99,6 +101,7 @@ $(document).ready(function () {
     }
     
 
+        /* Builds out user response options.*/
     function buildOptions(options) {
         return options.map((option, index) => {
             return `<div class="form-check">
@@ -108,6 +111,7 @@ $(document).ready(function () {
         }).join('');
     }
 
+        /* Calculates user score and takes user to the result screen. Hiding the questions and next button. */
     function showResult() {
         questionsContainer.children().last().addClass('hidden');
         nextBtn.hide();
@@ -128,6 +132,7 @@ $(document).ready(function () {
         stopTimer();
     }
 
+        /* Collects the user input for each question */
     function collectUserAnswers() {
         const userAnswers = [];
 
@@ -139,6 +144,7 @@ $(document).ready(function () {
         return userAnswers;
     }
 
+        /* Starts the timer to countdown from 150 seconds */
     function startTimer() {
         let timeLeft = parseInt(timerDisplay.text().replace("Time: ", ""), 10) || 150;
     
@@ -154,11 +160,13 @@ $(document).ready(function () {
         }, 1000);
     }
 
+        /* Stops the timer and removes the timer display.*/
     function stopTimer() {
         clearInterval(timer);
         timerDisplay.text(``);
     }
 
+        /* Shows the high score container. */
     function displayHighScores() {
         highScoreContainer.show();
         highScoreContainer.empty();
@@ -174,12 +182,14 @@ $(document).ready(function () {
         }
     }
 
+        /* Saves high score to the local storage.*/
     function saveHighScore(initials, score) {
         const newHighScore = { initials, score };
         highScores.push(newHighScore);
         localStorage.setItem("highScores", JSON.stringify(highScores));
     }
 
+        /* Adds initials and score to the high score screen.*/
     submitScoreBtn.on("click", function () {
         const initials = initialsInput.val().toUpperCase();
         const score = calculateScore();
@@ -193,6 +203,7 @@ $(document).ready(function () {
         }
     });
 
+        /* Checks if the user answered each question correctly and returns the number of correct questions.*/
     function calculateScore() {
         const userAnswers = collectUserAnswers();
         let score = 0;
@@ -206,7 +217,7 @@ $(document).ready(function () {
         return score;
     }
 
-
+        /* Cycles to the next question */
     nextBtn.on("click", function () {
         if (currentStep < quizData.length - 1) {
             subtractTime();
@@ -219,6 +230,7 @@ $(document).ready(function () {
         }
     });
 
+        /* Starts the quiz when you click the start button.*/
     startBtn.on("click", function () {
         startBtn.hide();
         title.hide();
@@ -226,6 +238,7 @@ $(document).ready(function () {
         buildQuiz();
     });
 
+        /* Restarts the quiz from the first page when you click the restart button after completing the quiz.*/
     restartBtn.on("click", function () {
         currentStep = 0;
         resultsContainer.empty();
